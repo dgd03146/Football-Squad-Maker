@@ -1,0 +1,14 @@
+@value makerYellow, makerOrange from '../../common/colors.css';
+
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 0.5em;
+  background-color: makerYellow;
+  position: relative;
+}
+
+.title {
+  margin: 0;
+  color: makerOrange;
+}

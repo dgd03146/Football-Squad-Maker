@@ -1,0 +1,35 @@
+@value makerYellow, makerOrange from '../../common/colors.css';
+
+.login {
+  width: 50em;
+  background-color: white;
+}
+
+.login h1 {
+  text-align: center;
+  font-size: 1.3em;
+}
+
+.list {
+  text-align: center;
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  padding: 1em;
+}
+
+.button {
+  width: 100%;
+  height: 4em;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  border: solid 0.2em makerYellow;
+  border-radius: 2em;
+}
+
+.button:hover {
+  background-color: orange;
+}

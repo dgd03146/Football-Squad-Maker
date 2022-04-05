@@ -1513,6 +1513,11 @@
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.6.1.tgz#0c74724ba6e9ea6ad25a391eab60a79eaba4c556"
   integrity sha512-9FqhNjKQWpQ3fGnSOCovHOm+yhhiorKEqYLAfd525jWavunDJcx8rOW6i6ozAh+FbwcYMkL7b+3j4UR/30MpoQ==
 
+"@greatsumini/react-facebook-login@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@greatsumini/react-facebook-login/-/react-facebook-login-3.0.0.tgz#5a448e21fc65a2b90bbe7896b5aa1469d58bf8a0"
+  integrity sha512-j2i+pzaYIcIXRGjmJwJiRxxtSsELChF87UVrTKLBJAXcmPLtnLTy/LNFrrrvp2yssKZrEc8fb2anQf1/X48LBg==
+
 "@grpc/grpc-js@^1.3.2":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.6.0.tgz#b9616121fdff6b2fa21011be96e35f03e57a5c78"
@@ -4576,6 +4581,11 @@ dotenv@8.2.0:
   version "8.2.0"
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-8.2.0.tgz"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
+dotenv@^16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.0.tgz#c619001253be89ebb638d027b609c75c26e47411"
+  integrity sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==
 
 duplexer@^0.1.1:
   version "0.1.2"
