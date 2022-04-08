@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import styles from "./login.module.css";
+import AuthContext from "../../store/auth-context";
 
 const Login = ({ authService }) => {
+  const ctx = useContext(AuthContext);
+
   const onLogin = (event) => {
     authService //
-      .login(event.currentTarget.textContent)
-      .then(console.log);
+      .login(event.currentTarget.textContent);
   };
+
+  useEffect(() => {
+    authService.onAuthChange((user) => {
+      if (user) {
+        ctx.login(user);
+      }
+    });
+  });
+
   return (
     <section className={styles.login}>
       <Header />

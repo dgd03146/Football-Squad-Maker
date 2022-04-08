@@ -1,4 +1,11 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signOut,
+  onAuthStateChanged
+} from "firebase/auth";
 
 class AuthService {
   constructor() {
@@ -9,6 +16,22 @@ class AuthService {
   login(providerName) {
     const authProvider = this.getProvider(providerName);
     return signInWithPopup(this.firebaseAuth, authProvider);
+  }
+
+  onAuthChange(onUserChanged) {
+    this.firebaseAuth.onAuthStateChanged((user) => {
+      onUserChanged(user);
+    });
+  }
+
+  logout() {
+    signOut(this.firebaseAuth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
   }
 
   getProvider(providerName) {
