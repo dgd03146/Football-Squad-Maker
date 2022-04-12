@@ -1,0 +1,13 @@
+@value mediaQuery from '../../../common/size.css';
+
+.players {
+  display: flex;
+
+  height: 100%;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .players {
+    flex-direction: column;
+  }
+}

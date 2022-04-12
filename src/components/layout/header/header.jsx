@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styles from "./header.module.css";
-import logo from "../../images/logo.png";
+import logo from "../../../images/logo.png";
 import { NavLink } from "react-router-dom";
-import AuthContext from "../../store/auth-context";
+import AuthContext from "../../../store/auth-context";
 
 const Header = ({ authService }) => {
   const ctx = useContext(AuthContext);
@@ -12,7 +12,7 @@ const Header = ({ authService }) => {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles["header"]} ${!ctx.isLoggedIn && styles.home}`}>
       {ctx.isLoggedIn && (
         <button className={styles.logout} onClick={onLogout}>
           Logout
@@ -21,15 +21,15 @@ const Header = ({ authService }) => {
       <img className={styles.logo} src={logo} alt="logo" />
       <h1 className={styles.title}>Football Squad Maker</h1>
       {ctx.isLoggedIn && (
-        <nav className={styles.nav}>
+        <nav>
           <ul>
             <li>
-              <NavLink to="/players" className={(navData) => (navData.isActive ? styles.active : "")}>
+              <NavLink to="/main/players" className={(navData) => (navData.isActive ? styles.active : "")}>
                 Players
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/squad" className={(navData) => (navData.isActive ? styles.active : "")}>
+            <li className={styles.list}>
+              <NavLink to="/main/squad" className={(navData) => (navData.isActive ? styles.active : "")}>
                 Squad
               </NavLink>
             </li>

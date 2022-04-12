@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = React.createContext({
   isLoggedIn: false,
   login: (user) => {},
-  logOut: () => {}
+  logOut: () => {},
+  players: [],
+  addPlayer: (player) => {},
+  removePlayer: (id) => {}
 });
 
 export const AuthContextProvider = (props) => {
