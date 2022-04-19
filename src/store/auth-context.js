@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -12,16 +12,16 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = (props) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   let navigate = useNavigate();
   const goToMain = (userId) => {
-    navigate("/main", { state: userId });
+    navigate('/main', { state: userId });
   };
 
   const goToLogin = () => {
-    navigate("/");
+    navigate('/');
   };
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const logInHandler = (user) => {
     setIsLoggedIn(true);
@@ -33,8 +33,21 @@ export const AuthContextProvider = (props) => {
     goToLogin();
   };
 
+  const addPlayerHandler = (player) => {};
+
+  const removePlayerHandler = (id) => {};
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn: isLoggedIn, login: logInHandler, logOut: logOutHandler }}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+        login: logInHandler,
+        logOut: logOutHandler,
+        players: [],
+        addPlayer: addPlayerHandler,
+        removePlayer: removePlayerHandler
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

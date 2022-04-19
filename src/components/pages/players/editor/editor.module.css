@@ -3,11 +3,98 @@
 .editor {
   flex-basis: 50%;
   background-color: wheat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  width: 60%;
 }
 
 .title {
   width: 100%;
   text-align: center;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   color: makerOrange;
+}
+
+.creator {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.firstRow {
+  width: 100%;
+  display: flex;
+}
+
+.nameContainer {
+  display: flex;
+  flex-basis: 70%;
+  flex-direction: column;
+  margin-right: 1em;
+}
+
+.colorContainer {
+  display: flex;
+  flex-basis: 30%;
+  flex-direction: column;
+}
+
+.name {
+  padding: 0.5em;
+}
+
+.upload {
+  padding: 0.5em;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+.upload input[type='file'] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+.upload label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #999999;
+  cursor: pointer;
+  height: 40px;
+  margin-left: 10px;
+}
+
+.delete {
+  padding: 0.5em;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+.delete:hover {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.label {
+  font-size: 0.8em;
+  margin: 0.5em 0;
+  color: gray;
+  font-weight: 600;
+}
+
+select {
+  padding: 0.5em;
+  width: 100%;
 }

@@ -1,0 +1,37 @@
+.card {
+  border-radius: 35% 35% 50% 50% / 20% 20% 40% 40%;
+  padding: 2em;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leftBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1em;
+}
+
+.position {
+  margin: 0;
+  margin-bottom: 0.5em;
+  font-size: 1.5em;
+}
+
+.nation {
+  width: 3em;
+}
+
+.face {
+  width: 14em;
+  height: 14em;
+}
+
+.bottom {
+  text-align: center;
+}

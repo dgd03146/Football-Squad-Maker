@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -10,9 +11,11 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACt_APP_FIREBASE_PROJECT_ID
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET
 };
 
 // Initialize Firebase
 
 export const firebaseApp = initializeApp(firebaseConfig);
+export const storage = getStorage(firebaseApp);

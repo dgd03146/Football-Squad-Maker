@@ -1,9 +1,8 @@
-import React, { useEffect, useContext } from "react";
-
-import Footer from "../../layout/footer/footer";
-import Header from "../../layout/header/header";
-import styles from "./login.module.css";
-import AuthContext from "../../../store/auth-context";
+import React, { useEffect, useContext } from 'react';
+import Footer from '../../layout/footer/footer';
+import Header from '../../layout/header/header';
+import styles from './login.module.css';
+import AuthContext from '../../../store/auth-context';
 
 const Login = ({ authService }) => {
   const ctx = useContext(AuthContext);
