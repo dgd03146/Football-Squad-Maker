@@ -2,7 +2,14 @@ import styles from './position.module.css';
 
 const Position = (props) => {
   return (
-    <select className={styles.select} name="position" id="position" type="text" ref={props.positionRef}>
+    <select
+      className={styles.select}
+      name="position"
+      id="position"
+      type="text"
+      ref={props.positionRef}
+      value={props.position}
+    >
       <option value="CAM">CENTRE ATTACKING MIDFIELDER</option>
       <option value="CB">CENTRE BACK</option>
       <option value="CDM">CENTRE DEFENSIVE MIDFIELDER</option>

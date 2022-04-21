@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styles from './playerCards.module.css';
-import AuthContext from '../../../../store/auth-context';
 import PlayerCard from './playerCard';
+import AuthContext from '../../../../store/auth-context';
 
 const PlayerCards = (props) => {
   const [players, setPlayers] = useState([]);
+
+  // const playerCtx = useContext(AuthContext);
 
   useEffect(() => {
     const fetchPlayers = async () => {
@@ -19,7 +21,9 @@ const PlayerCards = (props) => {
           color: responseData[key].player.color,
           country: responseData[key].player.country,
           name: responseData[key].player.name,
-          position: responseData[key].player.position
+          nickname: responseData[key].player.nickname,
+          position: responseData[key].player.position,
+          url: responseData[key].player.url
         });
       }
 
@@ -31,8 +35,17 @@ const PlayerCards = (props) => {
 
   return (
     <ul className={styles.ul}>
-      {players.map((card) => {
-        return <PlayerCard key={card.id} name={card.name} position={card.position} nickname={card.nickname} />;
+      {players.map((player) => {
+        return (
+          <PlayerCard
+            key={player.id}
+            name={player.name}
+            color={player.color}
+            position={player.position}
+            url={player.url}
+            nickname={player.nickname}
+          />
+        );
       })}
     </ul>
   );

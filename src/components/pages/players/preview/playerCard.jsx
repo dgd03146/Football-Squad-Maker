@@ -12,11 +12,11 @@ const PlayerCard = (props) => {
           <p className={styles.position}>{props.position}</p>
           <img className={styles.nation} src={neymar} alt="nation" />
         </div>
-        <img className={styles.face} src={messi} alt="face" />
+        <img className={styles.face} src={props.url} alt="face" />
       </div>
       <div className={styles.bottom}>
         <h1 className={styles.name}>{props.name}</h1>
-        {/* <p className={styles.nickname}>{props.nickname}</p> */}
+        <p className={styles.nickname}>{props.nickname}</p>
       </div>
     </Card>
   );
