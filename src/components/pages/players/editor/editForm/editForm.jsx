@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useContext } from 'react';
 import AuthContext from '../../../../../store/auth-context';
 import Position from '../position/position';
 import { CountryDropdown } from 'react-country-region-selector';
@@ -8,7 +8,7 @@ import Card from '../../../../layout/card/card';
 const EditForm = ({ card, FileInput, playerRepository, userId }) => {
   const playerCtx = useContext(AuthContext);
 
-  const { name, color, position, country, nickname, url, fileName } = card;
+  const { name, color, position, country, nickname, fileName } = card;
 
   const onChange = (event) => {
     if (event.currentTarget == null) {

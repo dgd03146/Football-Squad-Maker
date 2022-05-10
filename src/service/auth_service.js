@@ -3,8 +3,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,
-  signOut,
-  onAuthStateChanged
+  signOut
 } from 'firebase/auth';
 
 class AuthService {

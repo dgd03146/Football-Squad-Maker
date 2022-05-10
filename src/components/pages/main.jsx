@@ -26,7 +26,7 @@ const Main = ({ authService, FileInput, playerRepository }) => {
       ctx.syncPlayers(players);
     });
     return () => stopSync();
-  }, [userId]);
+  }, [userId, playerRepository, ctx]);
 
   useEffect(() => {
     authService.onAuthChange((user) => {
@@ -36,7 +36,7 @@ const Main = ({ authService, FileInput, playerRepository }) => {
         goToLogin();
       }
     });
-  });
+  }, [authService, goToLogin]);
 
   return (
     <section className={styles.main}>
