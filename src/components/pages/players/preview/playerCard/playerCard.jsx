@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './playerCard.module.css';
-import Card from '../../../layout/card/card';
-import messi from '../../../../images/messi.jpg';
-import neymar from '../../../../images/neymar.jpg';
+import Card from '../../../../layout/card/card';
+
+import neymar from '../../../../../images/neymar.jpg';
 
 const PlayerCard = (props) => {
   return (

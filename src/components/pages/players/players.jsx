@@ -1,12 +1,16 @@
-import React from "react";
-import Editor from "./editor/editor";
-import Preview from "./preview/preview";
-import styles from "./players.module.css";
+import React from 'react';
+import Editor from './editor/editor';
+import Preview from './preview/preview';
+import styles from './players.module.css';
 
-const Players = (props) => {
+const Players = ({ FileInput, playerRepository, userId }) => {
   return (
     <section className={styles.players}>
-      <Editor />
+      <Editor
+        FileInput={FileInput}
+        playerRepository={playerRepository}
+        userId={userId}
+      />
       <Preview />
     </section>
   );

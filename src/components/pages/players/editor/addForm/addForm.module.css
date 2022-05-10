@@ -42,41 +42,22 @@
 .upload {
   width: 100%;
   display: flex;
+}
+
+.fileInput {
   padding: 0;
+  flex: 1 1 50%;
+}
+
+.add {
+  padding: 0.5em;
   font-weight: 700;
   cursor: pointer;
   outline: none;
   flex: 1 1 50%;
 }
 
-/* .upload input[type='file'] {
-  position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-} */
-
-.upload label {
-  display: inline-block;
-  padding: 10px 20px;
-  color: #fff;
-  vertical-align: middle;
-  background-color: #999999;
-  cursor: pointer;
-  height: 40px;
-  /* margin-left: 10px; */
-}
-
-.delete {
-  padding: 0.5em;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
-}
-
-.delete:hover {
+.add:hover {
   background-color: black;
   color: white;
   border-color: black;

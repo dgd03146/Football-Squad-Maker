@@ -4,27 +4,30 @@ import AuthContext from '../../../../store/auth-context';
 import { useContext } from 'react';
 import AddForm from './addForm/addForm';
 
-const Editor = (props) => {
+const Editor = ({ FileInput, playerRepository, userId }) => {
   const playerCtx = useContext(AuthContext);
 
   return (
     <section className={styles.editor}>
       <h1 className={styles.title}>CREATE PLAYER</h1>
       <ul className={styles.ul}>
-        {playerCtx.players.map((player) => {
+        {Object.keys(playerCtx.players).map((key) => {
+          const player = playerCtx.players[key];
           return (
             <EditForm
               key={player.id}
-              name={player.name}
-              position={player.position}
-              country={player.country}
-              color={player.color}
-              nickname={player.nickname}
-              url={player.nickname}
+              card={player}
+              FileInput={FileInput}
+              playerRepository={playerRepository}
+              userId={userId}
             />
           );
         })}
-        <AddForm />
+        <AddForm
+          FileInput={FileInput}
+          playerRepository={playerRepository}
+          userId={userId}
+        />
       </ul>
     </section>
   );

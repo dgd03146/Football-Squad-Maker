@@ -9,6 +9,7 @@ const Position = (props) => {
       type="text"
       ref={props.positionRef}
       value={props.position}
+      onChange={props.onChange}
     >
       <option value="CAM">CENTRE ATTACKING MIDFIELDER</option>
       <option value="CB">CENTRE BACK</option>

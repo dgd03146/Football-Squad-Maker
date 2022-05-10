@@ -1,0 +1,50 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  display: none;
+}
+
+.button {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-weight: bold;
+  border: 0;
+  outline: 0;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button.grey {
+  background-color: grey;
+}
+
+.button.green {
+  background-color: green;
+}
+
+.loading {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: solid 3px gray;
+  border-top: solid 3px yellowgreen;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

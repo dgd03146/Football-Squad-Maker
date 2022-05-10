@@ -1,21 +1,26 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../../layout/footer/footer';
 import Header from '../../layout/header/header';
 import styles from './login.module.css';
-import AuthContext from '../../../store/auth-context';
+
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ authService }) => {
-  const ctx = useContext(AuthContext);
+  let navigate = useNavigate();
+  const goToPlayer = (userId) => {
+    navigate('/main/players', { state: { id: userId } });
+  };
 
   const onLogin = (event) => {
     authService //
-      .login(event.currentTarget.textContent);
+      .login(event.currentTarget.textContent)
+      .then((data) => goToPlayer(data.user.uid));
   };
 
   useEffect(() => {
     authService.onAuthChange((user) => {
       if (user) {
-        ctx.login(user);
+        goToPlayer(user.uid);
       }
     });
   });

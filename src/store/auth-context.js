@@ -1,91 +1,70 @@
 import React, { useState, useReducer } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
-import son from '../images/son.jpg';
-
 const AuthContext = React.createContext({
-  players: [],
+  players: {},
 
-  isLoggedIn: false,
   login: (user) => {},
   logOut: () => {},
-  addPlayer: (player) => {},
-  removePlayer: (id) => {}
+  updatePlayer: (player) => {},
+  deletePlayer: (player) => {},
+  syncPlayers: (players) => {}
 });
 
 const defaultPlayerState = {
-  players: [
-    {
-      id: 1,
-      color: 'gold',
-      country: 'Korea, Republic of',
-      name: 'Son Heung Min',
-      nickname: 'Sonsational',
-      position: 'LW',
-      fileName: '',
-      url: son
-    }
-  ],
-
-  isLoggedIn: false
+  players: {}
 };
 
 const playerReducer = (state, action) => {
-  if (action.type === 'ADD') {
-    const updatedPlayers = [...state.players, action.player];
-
+  if (action.type === 'UPDATE') {
+    const updatedPlayers = { ...state.players };
+    updatedPlayers[action.player.id] = action.player;
     return {
       players: updatedPlayers
     };
   }
-  if (action.type === 'REMOVE') {
+  if (action.type === 'DELETE') {
+    const updatedPlayers = { ...state.players };
+    delete updatedPlayers[action.player.id];
+    return {
+      players: updatedPlayers
+    };
   }
+  if (action.type === 'SYNC') {
+    const updatedPlayers = { ...action.players };
+    return {
+      players: updatedPlayers
+    };
+  }
+
   return defaultPlayerState;
 };
 
 export const AuthContextProvider = (props) => {
-  const [playerState, dispatchPlayerAction] = useReducer(playerReducer, defaultPlayerState);
+  const [playerState, dispatchPlayerAction] = useReducer(
+    playerReducer,
+    defaultPlayerState
+  );
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  let navigate = useNavigate();
-  const goToPlayer = (userId) => {
-    navigate('/main/players', { state: userId });
+  const updatePlayerHandler = (player) => {
+    dispatchPlayerAction({ type: 'UPDATE', player: player });
   };
 
-  const goToLogin = () => {
-    navigate('/');
+  const deletePlayerHandler = (player) => {
+    dispatchPlayerAction({ type: 'DELETE', player: player });
   };
 
-  const logInHandler = (user) => {
-    setIsLoggedIn(true);
-    goToPlayer(user.uid);
-  };
-
-  const logOutHandler = () => {
-    setIsLoggedIn(false);
-    goToLogin();
-  };
-
-  const addPlayerHandler = (player) => {
-    dispatchPlayerAction({ type: 'ADD', player: player });
-  };
-
-  const removePlayerHandler = (id) => {
-    dispatchPlayerAction({ type: 'REMOVE', id: id });
+  const syncPlayersHandler = (players) => {
+    dispatchPlayerAction({ type: 'SYNC', players: players });
   };
 
   return (
     <AuthContext.Provider
       value={{
         players: playerState.players,
-        isLoggedIn: isLoggedIn,
 
-        login: logInHandler,
-        logOut: logOutHandler,
-        addPlayer: addPlayerHandler,
-        removePlayer: removePlayerHandler
+        updatePlayer: updatePlayerHandler,
+        deletePlayer: deletePlayerHandler,
+        syncPlayers: syncPlayersHandler
       }}
     >
       {props.children}

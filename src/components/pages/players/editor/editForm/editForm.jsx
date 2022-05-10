@@ -1,107 +1,68 @@
-import React, { useRef, useState, useContext } from 'react';
-import { storage } from '../../../../../service/firebase';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import React, { useRef, useContext } from 'react';
 import AuthContext from '../../../../../store/auth-context';
-import Position from '../position';
+import Position from '../position/position';
 import { CountryDropdown } from 'react-country-region-selector';
 import styles from './editForm.module.css';
 import Card from '../../../../layout/card/card';
-import ImageFileInput from '../image_file_input/imageFileInput';
 
-const EditForm = (props) => {
+const EditForm = ({ card, FileInput, playerRepository, userId }) => {
   const playerCtx = useContext(AuthContext);
 
-  const [country, setCountry] = useState('');
+  const { name, color, position, country, nickname, url, fileName } = card;
 
-  const [image, setImage] = useState(null);
-  const [error, setError] = useState(null);
-  const [url, setUrl] = useState(null);
-
-  const nameRef = useRef();
-  const colorRef = useRef();
-  const positionRef = useRef();
-  const nicknameRef = useRef();
-
-  const types = ['image/png', 'image/jpeg'];
-
-  const selectCountry = (val) => {
-    setCountry(val);
-  };
-
-  const handleImageChange = (e) => {
-    let selected = e.target.files[0];
-
-    if (selected && types.includes(selected.type)) {
-      setImage(selected);
-      setError('');
-    } else {
-      setImage(null);
-      setError('Please select an image file (png or jpeg');
+  const onChange = (event) => {
+    if (event.currentTarget == null) {
+      return;
     }
-  };
 
-  const submitHandler = (event) => {
     event.preventDefault();
-    const imageRef = ref(storage, 'image');
-    uploadBytes(imageRef, image)
-      .then(() => {
-        getDownloadURL(imageRef)
-          .then((url) => {
-            setUrl(url);
-          })
-          .catch((error) => {
-            console.log(error.message, 'error getting the image url');
-          });
-        setImage(null);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-    addPlayerHandler();
-    submitData();
-  };
 
-  const addPlayerHandler = () => {
-    playerCtx.addPlayer({
-      id: Date.now(),
-      name: nameRef.current.value || '',
-      color: colorRef.current.value,
-      position: positionRef.current.value || '',
-      country: country,
-      nickname: nicknameRef.current.value || '',
-      fileName: '',
-      url: url
-    });
-  };
-
-  const submitData = () => {
-    const player = {
-      ...playerCtx.players
+    const updatedCard = {
+      ...card,
+      [event.currentTarget.name]: event.currentTarget.value
     };
 
-    console.log(playerCtx.players);
+    playerCtx.updatePlayer(updatedCard);
+    playerRepository.saveCard(userId, updatedCard);
+  };
 
-    fetch('https://squad-maker-default-rtdb.firebaseio.com/players.json', {
-      method: 'POST',
-      body: JSON.stringify({ player })
-    });
+  const onSubmit = (event) => {
+    event.preventDefault();
+    playerCtx.deletePlayer(card);
+    playerRepository.removeCard(userId, card);
+  };
+
+  const onFileChange = (file) => {
+    const updatedCard = {
+      ...card,
+      fileName: file.name,
+      url: file.url
+    };
+    playerCtx.updatePlayer(updatedCard);
+    playerRepository.saveCard(userId, updatedCard);
   };
 
   return (
     <Card>
-      <form className={styles.creator} onSubmit={submitHandler}>
+      <form className={styles.creator} onSubmit={onSubmit}>
         <div className={styles.firstRow}>
           <div className={styles.nameContainer}>
             <label className={styles.label} htmlFor="name">
               NAME
             </label>
-            <input className={styles.name} name="name" type="text" ref={nameRef} value={props.name || ''} />
+            <input
+              className={styles.name}
+              name="name"
+              type="text"
+              value={name}
+              onChange={onChange}
+            />
           </div>
           <div className={styles.colorContainer}>
             <label className={styles.label} htmlFor="color">
               COLOR
             </label>
-            <select name="color" ref={colorRef} value={props.color || ''}>
+            <select name="color" value={color} onChange={onChange}>
               <option value="Gold">Gold</option>
               <option value="Silver">Silver</option>
               <option value="Bronze">Bronze</option>
@@ -111,23 +72,32 @@ const EditForm = (props) => {
         <label className={styles.label} htmlFor="position">
           POSITION
         </label>
-        <Position positionRef={positionRef} position={props.position} />
+        <Position position={position} onChange={onChange} />
         <label className={styles.label} htmlFor="country">
           COUNTRY
         </label>
-        <CountryDropdown value={props.country || ''} onChange={(val) => selectCountry(val)} />
+        <CountryDropdown
+          name="country"
+          value={country}
+          // onChange={(val) => selectCountry(val)}
+        />
         <label className={styles.label} htmlFor="nickname">
           NICKNAME
         </label>
-        <input className={styles.name} name="nickname" type="text" ref={nicknameRef} value={props.nickname || ''} />
+        <input
+          className={styles.name}
+          name="nickname"
+          type="text"
+          value={nickname}
+          onChange={onChange}
+        />
         <label className={styles.label} htmlFor="image">
           Choose an image from your phone or computer
         </label>
         <div className={styles.upload}>
-          {/* <label for="file">UPLOAD</label>
-          <input type="file" id="file" onChange={handleImageChange} />
-          {error && <div className={styles.error}>{error}</div>} */}
-          <ImageFileInput />
+          <div className={styles.fileInput}>
+            <FileInput onFileChange={onFileChange} name={fileName} />
+          </div>
           <button type="submit" className={styles.delete}>
             Delete
           </button>

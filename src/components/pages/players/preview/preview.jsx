@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PlayerCards from './playerCards';
+import PlayerCards from './playerCards/playerCards';
 import styles from './preview.module.css';
 
 const Preview = (props) => {

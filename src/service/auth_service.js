@@ -5,7 +5,7 @@ import {
   GithubAuthProvider,
   signOut,
   onAuthStateChanged
-} from "firebase/auth";
+} from 'firebase/auth';
 
 class AuthService {
   constructor() {
@@ -36,9 +36,9 @@ class AuthService {
 
   getProvider(providerName) {
     switch (providerName) {
-      case "Google":
+      case 'Google':
         return this.googleProvider;
-      case "Github":
+      case 'Github':
         return this.githubProvider;
       default:
         throw new Error(`not supproted provider: ${providerName}`);
